@@ -1,17 +1,22 @@
 # try ES2015
 
-Babelを用いたES2015のトランスパイル環境です。
+Babelを用いたES2015のトランスパイル環境です。  
 ES2015を試すために作りました。
 
-## 要件
+## Description
+
+- ツールは`babel-cli`を使用しています。
+- プリセットは`babel-preset-es2015`を使用しています。
+
+## Requirement
 
 `node`/`npm`を使います。
 
-## インストール
+## Installation
 
 `npm install`を実行します。
 
-## 使い方
+## Usage
 
 1. `src`ディレクトリ以下にES2015で書かれたjsファイルを配置します。
 1. `npm run build`を実行します。
