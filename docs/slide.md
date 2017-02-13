@@ -1,47 +1,82 @@
 class: center, middle
 
-# try ES2015
+# ES2015について
 
 ---
 
 # Agenda
 
 1. Introduction
-1. Description
-1. Requirement
-1. Installation
-1. Usage
+1. let、constによる変数宣言
+1. アロー関数による関数宣言
 
 ---
 
 # Introduction
 
-Babelを用いたES2015のトランスパイル環境です。  
-ES2015を試すために作りました。
+- ブラウザ対応状況
+ - http://caniuse.com/#search=es6
+
+
+- ES2015で可能となる新たなシンタックス
+ - let、constによる変数宣言
+ - アロー関数による関数宣言
+
 
 ---
 
-## Description
+### let、constによる変数宣言
 
-- ツールは`babel-cli`を使用しています。
-- プリセットは`babel-preset-es2015`を使用しています。
+- ES5までは関数スコープのみしか存在しなかったが、ES2015では`let`や`const`により定義された変数は、ブラケット`{}`によるブロックスコープが可能となった。
+
+
+        var x = 'foo';
+        if (true) {
+          var x = 'bar';
+          console.log(x); // bar
+        }
+        console.log(x); // bar  <- 値が書き換わっている
+
+
+        let x = 'foo';
+        if (true) {
+          let x = 'bar';
+          console.log(x); // bar
+        }
+        console.log(x); // foo  <- 値が書き換わっていない
+
+- `let`で宣言した変数は再代入を可能とするが、`const`で宣言した変数は再代入を不可とする。
 
 ---
 
-## Requirement
+### アロー関数による関数宣言
 
-`node`/`npm`を使います。
+- `this`は関数が定義されたスコープにおける`this`を引き継ぐ
 
----
 
-## Installation
+        // アロー関数を使わない場合
+        var num = 100;
+        let counter = {
+          num: 10,
+          count: function() {
+            setTimeout(function() {
+              this.num++;
+              console.log(this.num);  // 101  <- thisはグローバルオブジェクトを指している
+            }, 100);
+          }
+        };
+        counter.count();
 
-`npm install`を実行します。
 
----
-
-## Usage
-
-1. `src`ディレクトリ以下にES2015で書かれたjsファイルを配置します。
-1. `npm run build`を実行します。
-1. `lib`ディレクトリ以下にトランスパイルされたjsファイルが生成されます。
+        // アロー関数を使う場合
+        var num = 100;
+        let counter = {
+          num: 10,
+          count: function() {
+            setTimeout(() => {
+              this.num++;
+              console.log(this.num);  // 11 <- thisはcounterオブジェクトを指している
+            }, 100);
+          }
+        };
+        counter.count();
