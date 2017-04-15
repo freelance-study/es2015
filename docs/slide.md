@@ -9,6 +9,7 @@ class: center, middle
 1. Introduction
 1. let、constによる変数宣言
 1. アロー関数による関数宣言
+1. モジュール化
 
 ---
 
@@ -21,6 +22,7 @@ class: center, middle
 - ES2015で可能となる新たなシンタックス
  - let、constによる変数宣言
  - アロー関数による関数宣言
+ - モジュール化
 
 
 ---
@@ -80,3 +82,26 @@ class: center, middle
           }
         };
         counter.count();
+
+---
+
+### モジュール化
+
+- JSファイルを分けて開発する機能
+- これまではcommon.js等のライブラリを使用していた。  
+node.jsではrequire関数に相当する
+- ES2015ではimport/exportを使用する
+- 使い方  
+
+```javascript:myFunc.js
+export default function () {};
+```
+
+```javascript:main.js
+import myFunc from 'myFunc';
+myFunc();
+```
+
+- 基本的にはexport defaultを使う
+- 複数のモジュールをexportするときはexportを使う
+- 受け取り側はimportを使う
