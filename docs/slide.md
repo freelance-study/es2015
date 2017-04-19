@@ -60,7 +60,7 @@ Arrow Functions
 
 - `this`は関数が定義されたスコープにおける`this`を引き継ぐ
 
-
+```javascript
         // アロー関数を使わない場合
         var num = 100;
         let counter = {
@@ -73,8 +73,9 @@ Arrow Functions
           }
         };
         counter.count();
-
-
+```
+---
+```javascript
         // アロー関数を使う場合
         var num = 100;
         let counter = {
@@ -87,7 +88,7 @@ Arrow Functions
           }
         };
         counter.count();
-
+```
 ---
 
 ## モジュール化
@@ -97,6 +98,8 @@ Module
 - これまではcommon.js等のライブラリを使用していた。  
 node.jsではrequire関数に相当する
 - ES2015ではimport/exportを使用する
+
+---
 
 ### 使い方  
 
@@ -112,6 +115,8 @@ export default function myDefault() {}
 import myDefault from 'my-module';
 myDefault();
 ```
+
+---
 
 - メンバーを指定してインポートするときは名前指定を使う
 
@@ -141,6 +146,8 @@ var a, b;
 console.log(a);     // 1
 console.log(b);     // 2
 ```
+
+---
 
 代入時に足りない分は`undefined`に、余った分は切り捨てられる。
 
