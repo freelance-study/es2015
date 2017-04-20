@@ -11,6 +11,7 @@ class: center, middle
 1. アロー関数による関数宣言
 1. モジュール化
 1. 分割代入
+1. 配列展開
 1. クラス宣言
 
 ---
@@ -26,7 +27,9 @@ class: center, middle
  - アロー関数による関数宣言
  - モジュール化
  - 分割代入
+ - 配列展開
  - クラス宣言
+ - クラス式
 
 
 ---
@@ -169,4 +172,105 @@ var {p, q} = o;
 
 console.log(p); // 42
 console.log(q); // true
+```
+
+---
+
+## 配列展開
+Array Spread
+
+`...`により配列を展開して関数の引数や配列へ代入する事ができる。
+
+```javascript
+// 関数
+function myFunction(x, y, z) { }
+var args = [0, 1, 2];
+myFunction(...args);
+
+// 配列
+var parts = ['shoulders', 'knees'];
+var lyrics = ['head', ...parts, 'and', 'toes'];
+// ["head", "shoulders", "knees", "and", "toes"]
+```
+
+---
+
+## クラス宣言
+class declaration
+
+```javascript
+// Polygonという名前のクラスを定義
+class Polygon {
+  constructor(height, width) {
+    this.name = 'Polygon';
+    this.height = height;
+    this.width = width;
+  }
+}
+
+// Polygonクラスを拡張してSquareという名前のクラスを作成
+class Square extends Polygon {
+  constructor(length) {
+    super(length, length);
+    this.name = 'Square';
+  }
+}
+```
+- コンストラクタはクラスが呼ばれた時に実行されるメソッド
+- コンストラクタで使われている`super()`は、コンストラクタ内でのみ使える  
+また、`this`キーワードの使用前に呼び出さなくてはならない
+- class 宣言は既存のクラスを再宣言できず、再宣言しようとすると型エラーになる
+
+---
+
+## クラス式
+class expression
+
+- class 式は、class の再定義/再宣言が可能
+- このキーワードを使って生成したクラスの typeof は常に "functions" になる
+
+```javascript
+'use strict';
+var Foo = class {}; // コンストラクタプロパティはオプション
+var Foo = class {}; // 再宣言は可能
+
+typeof Foo; // "function" を返す
+typeof class {}; // "function" を返す
+
+Foo instanceof Object; // true
+Foo instanceof Function; // true
+class Foo {}; // 再宣言は不可能で、TypeError を投げる
+```
+
+---
+
+### 簡単なクラス式
+
+```javascript
+var Foo = class {
+  constructor() {}
+  bar() {
+    return "Hello World!";
+  }
+};
+
+var instance = new Foo();
+instance.bar(); // "Hello World!"
+Foo.name; // ""
+```
+
+---
+
+### 名前付きクラス式
+```javascript
+var Foo = class NamedFoo {
+  constructor() {}
+  whoIsThere() {
+    return NamedFoo.name;
+  }
+}
+var bar = new Foo();
+bar.whoIsThere(); // "NamedFoo"
+NamedFoo.name; // ReferenceError: NamedFoo is not defined
+Foo.name; // "NamedFoo"
 ```
